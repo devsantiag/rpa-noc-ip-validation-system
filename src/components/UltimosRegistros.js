@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-// responsável por armazenar os últimos registros de IPs
+// responsável por armazenar os últimos registros de IPs;
 
 export default function UltimosRegistros({ item }) {
 
