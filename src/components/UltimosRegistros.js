@@ -1,28 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // responsável por armazenar os últimos registros de IPs;
 
 export default function UltimosRegistros({ item }) {
 
-    const [registros, setRegistros] = useState([])
-    
+    const [registro, setRegistro] = useState([])
 
-    const ultimaAplicacaoRegistro = new Date()
-    const gaveta = []
+    useEffect(() => {
+        const horaRegistro = new Date()
+        const newItem = { item: item[item.length - 1], horaRegistro }
+        setRegistro([...registro, newItem])
+    }, [item])
 
-    const novoIpRegistro = () => {
-        setRegistros([...gaveta, setRegistros])
-    }
 
     return (
-        <>
+        <div>
             <ul>
-                {item.map((item, index) => (
-                    <p key={index}>
-                        <p>{item} - Último registro: {new Date().toLocaleString()} </p>
+                {registro.map((registroItem, index) => (
+                    <p key={index}> 
+                        <p>
+                        {registroItem.item} - último registro: {registroItem.horaRegistro.toLocaleString()}
+                        </p>
                     </p>
                 ))}
             </ul>
-        </>
+        </div>
     )
 }
