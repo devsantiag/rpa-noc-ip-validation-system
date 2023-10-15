@@ -1,14 +1,10 @@
 import React from 'react'
-import Formulario from './components/Formulario';
+import HomePage from './components/HomePage/HomePage'
 
-function App() {
-  return (
-    <div>
-
-      <Formulario/>
-
-    </div>
-  );
+export default function App() {
+    return(
+        <div>
+            <HomePage/>
+        </div>
+    )
 }
-
-export default App;
