@@ -1,4 +1,5 @@
 import React from "react";
+import '../css/homePage.css'
 
 // home page principal
 
