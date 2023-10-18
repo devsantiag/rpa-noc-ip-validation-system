@@ -25,11 +25,11 @@ export default function Formulario() {
         // verifica se o IP é válido            
         const novoRegistro = ipValue
         if (novoRegistro.length < 12) {
-            alert('Não foi possível identificar este IP, por favor, tente novamente.')
+            alert('Não foi possível identificar este IP, por favor, tente novamente.') 
             return;
         }
         // registra o IP no estado
-        setipRegistroMaquina([...ipRegistroMaquina, novoRegistro])
+        setipRegistroMaquina([...ipRegistroMaquina, novoRegistro]) 
         setIpValue('')
         gravarHoraRegistro();
     }
@@ -69,4 +69,4 @@ export default function Formulario() {
             </section>
         </div>
     )
-}
+}  

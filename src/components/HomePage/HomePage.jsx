@@ -1,7 +1,7 @@
 import React from "react";
 import '../css/homePage.css'
 
-// home page principal
+// home pagepage main
 
 import Formulario from "../Form/Formulario";
 
