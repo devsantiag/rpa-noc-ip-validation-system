@@ -1,8 +1,20 @@
+
+h3 {
+    text-align: center;
+}
+
 .styleList {
     margin: 2%;
 }
 
 .lineIndex {
-    margin: 1.1px;
-    background-color: rgba(104, 104, 104, 0.493);
+    margin: 5px;
+    margin-bottom: 5px;
+    background-color: rgba(66, 66, 66, 0.096);
+}
+
+.contadorRegistros p {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
 }
