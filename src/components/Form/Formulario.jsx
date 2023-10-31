@@ -4,21 +4,27 @@ import '../css/formulario.css';
 export default function Formulario() {
 
     const [ipValue, setIpValue] = useState();
-    const [ipRegistroMaquina, setIpRegistroMaquina] = useState([]);
-    const [armazemHora, setArmazemHora] = useState([]);
-    const [itensExcluidos, setItensExcluidos] = useState(0);
-    const [itensRepetidos, setItensRepetidos] = useState(0);
+    const [ipMachineRegistration, setipMachineRegistration] = useState([]);
+    const [recordTime, setRecordTime] = useState([]);
+    const [excluded, setExcluded] = useState(0);
+    const [repeated, setRepeted] = useState(0);
 
-    // escopo destinado a formatar o IP 
-    const formatIp = (ip) => {
+    // formata o IP
+    const format = (ip) => {
         const cleanCharacter = ip.replace(/\D/g, '');
         const ipPattern = cleanCharacter.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3.$4');
         return ipPattern;
     };
 
+    // coleta as informações de entrada do IP no input para formatação
+    const hundleInputChange = (eventFormat) => {
+        const toApplyFormated = format(eventFormat.target.value);
+        setIpValue(toApplyFormated);
+    };
+
     // verifica se o IP já foi inserido
-    const ipJaRegistrado = (toCheckIp) => {
-        return ipRegistroMaquina.some((ipRegistro) => ipRegistro === toCheckIp);
+    const alreadyRegistered = (check) => {
+        return ipMachineRegistration.some((ip) => ip === check);
     }
 
     // responsável para registrar o IP
@@ -31,45 +37,39 @@ export default function Formulario() {
             return;
         }
 
-        // verifica se o IP é válido sendo ele não menor que 12           
-        const novoRegistro = ipValue;
-        if (novoRegistro.length < 12) {
+        // verifica que o tamanho do IP não é menor que 12
+        const getIpValue = ipValue;
+        if (getIpValue.length < 12) {
             alert('Não foi possível identificar este IP, por favor, tente novamente.');
             return;
+        } else {
+            // registra o IP no estado
+            setipMachineRegistration([...ipMachineRegistration, getIpValue]);
+            setIpValue('');
+            recordTimeRecord();
         }
 
-        // registra o IP no estado
-        setIpRegistroMaquina([...ipRegistroMaquina, novoRegistro]);
-        setIpValue('');
-        gravarHoraRegistro();
-
         // verifica se o IP já foi inserido
-        if (!ipJaRegistrado(novoRegistro)) {
+        if (!alreadyRegistered(getIpValue)) {
             return true;
         } else {
             alert('Este IP já foi incerido no sistema.');
-            setItensRepetidos(itensRepetidos + 1);
+            setRepeted(repeated + 1);
             return false;
         }
     }
 
-    // responsável por formatar o IP
-    const hundleInputChange = (eventFormat) => {
-        const toApplyFormated = formatIp(eventFormat.target.value);
-        setIpValue(toApplyFormated);
-    };
-
     // responsável por gravar a hora de registro do último IP inserido
-    function gravarHoraRegistro() {
+    function recordTimeRecord() {
         const corretaDataParaRegistro = new Date();
-        setArmazemHora([...armazemHora, corretaDataParaRegistro]);
+        setRecordTime([...recordTime, corretaDataParaRegistro]);
     }
 
     // responsável por excluir o IP
     function excluirIP(index) {
-        setIpRegistroMaquina(ipRegistroMaquina.filter((item, i) => i !== index));
-        setArmazemHora(armazemHora.filter((item, i) => i !== index));
-        setItensExcluidos(itensExcluidos + 1);
+        setipMachineRegistration(ipMachineRegistration.filter((item, i) => i !== index));
+        setRecordTime(recordTime.filter((item, i) => i !== index));
+        setExcluded(excluded + 1);
     }
 
     return (
@@ -78,9 +78,9 @@ export default function Formulario() {
                 <h3>Registros de RPA</h3>
                 <form onSubmit={hundleSubmit}>
                     <div className="contadorRegistros">
-                        <p>Registros: {ipRegistroMaquina.length}</p>
-                        <p>Repetidos: {itensRepetidos} </p>
-                        <p>Excluidos: {itensExcluidos} </p>
+                        <p>Registros: {ipMachineRegistration.length}</p>
+                        <p>Repetidos: {repeated} </p>
+                        <p>Excluidos: {excluded} </p>
                     </div>
                     <input
                         id="inputIp"
@@ -94,8 +94,10 @@ export default function Formulario() {
                 <section>
                     <li className='styleList'>
                         <h5>Últimos registros</h5>
-                        {ipRegistroMaquina.map((item, index) => (
-                            <li key={index} className="lineIndex"> ({index + 1}) - {item} último registro {armazemHora[index].toLocaleString()} <button onClick={() => excluirIP(index)}>Excluir</button></li>
+                        {ipMachineRegistration.map((item, index) => (
+
+                            <li key={index} className="lineIndex"> ({index + 1}) - {item} último registro {recordTime[index].toLocaleString()} <button onClick={() => excluirIP(index)} className>Excluir</button></li>
+
                         ))}
                     </li>
                 </section>
