@@ -5,6 +5,9 @@ h3 {
 
 .styleList {
     margin: 2%;
+    display: block;
+    flex-direction: column;
+    flex-flow: column-nowrap;
 }
 
 .lineIndex {
@@ -17,4 +20,8 @@ h3 {
     display: flex;
     justify-content: flex-end;
     margin-right: 10px;
+}
+
+.buttonExcluded {
+    text-align: center;
 }

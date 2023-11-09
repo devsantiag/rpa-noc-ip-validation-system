@@ -15,12 +15,12 @@ export default function Formulario() {
         const ipPattern = cleanCharacter.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3.$4');
         return ipPattern;
     };
-
+    
     // coleta as informações de entrada do IP no input para formatação
     const hundleInputChange = (eventFormat) => {
         const toApplyFormated = format(eventFormat.target.value);
         setIpValue(toApplyFormated);
-    };
+    };  
 
     // verifica se o IP já foi inserido
     const alreadyRegistered = (check) => {
@@ -61,8 +61,8 @@ export default function Formulario() {
 
     // responsável por gravar a hora de registro do último IP inserido
     function recordTimeRecord() {
-        const corretaDataParaRegistro = new Date();
-        setRecordTime([...recordTime, corretaDataParaRegistro]);
+        const getLocalDate = new Date();
+        setRecordTime([...recordTime, getLocalDate]);
     }
 
     // responsável por excluir o IP
@@ -82,6 +82,9 @@ export default function Formulario() {
                         <p>Repetidos: {repeated} </p>
                         <p>Excluidos: {excluded} </p>
                     </div>
+                    <div className="homeIpExcluidos">
+                        <p>IPs excluídos</p>
+                    </div>
                     <input
                         id="inputIp"
                         type="text"
@@ -95,9 +98,7 @@ export default function Formulario() {
                     <li className='styleList'>
                         <h5>Últimos registros</h5>
                         {ipMachineRegistration.map((item, index) => (
-
-                            <li key={index} className="lineIndex"> ({index + 1}) - {item} último registro {recordTime[index].toLocaleString()} <button onClick={() => excluirIP(index)} className>Excluir</button></li>
-
+                            <li key={index} className="lineIndex"> ({index + 1}) - {item} último registro {recordTime[index].toLocaleString()} <button onClick={() => excluirIP(index)} className='buttonExcluded'>Excluir</button></li>
                         ))}
                     </li>
                 </section>
