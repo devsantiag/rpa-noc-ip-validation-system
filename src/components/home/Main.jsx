@@ -1,5 +1,5 @@
 import React from "react";
-import '../css/homePage.css'
+import '../css/HomePage.css'
 import Formulario from "../Form/Formulario";
 
 
