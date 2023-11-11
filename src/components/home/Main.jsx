@@ -1,6 +1,7 @@
 import React from "react";
 import '../css/HomePage.css'
 import Formulario from "../Form/Formulario";
+import Footer from "../Form/Footer";
 
 
 
@@ -9,6 +10,7 @@ export default function HomePage() {
     return(
         <div>
             <Formulario/>
+            <Footer/>
         </div>
     )
 }
