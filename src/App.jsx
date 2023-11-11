@@ -1,10 +1,10 @@
 import React from 'react'
-import HomePage from './components/Home/Main'
+import Formulario from '../src/Form/Formulario'
 
 export default function App() {
     return(
         <div>
-            <HomePage/>
+            <Formulario/>
         </div>
     )
 }
