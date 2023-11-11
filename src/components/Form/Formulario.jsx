@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../css/Formulario.css';
+import '../css/Formulario/Formulario.css'
 
 export default function Formulario() {
 
