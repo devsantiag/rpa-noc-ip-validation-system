@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../css/formulario.css';
+import '../css/Formulario.css';
 
 export default function Formulario() {
 
@@ -15,12 +15,12 @@ export default function Formulario() {
         const ipPattern = cleanCharacter.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3.$4');
         return ipPattern;
     };
-    
+
     // coleta as informações de entrada do IP no input para formatação
     const hundleInputChange = (eventFormat) => {
         const toApplyFormated = format(eventFormat.target.value);
         setIpValue(toApplyFormated);
-    };  
+    };
 
     // verifica se o IP já foi inserido
     const alreadyRegistered = (check) => {
@@ -81,11 +81,15 @@ export default function Formulario() {
                         <p>Registros: {ipMachineRegistration.length}</p>
                         <p>Repetidos: {repeated} </p>
                         <p>Excluidos: {excluded} </p>
+                        <p>Total de registros: 0 </p>
                     </div>
                     <div className="homeIpExcluidos">
-                        <p>IPs excluídos</p>
+                        <a href="./Deleted.jsx" target="_blank">
+                            <p>IPs excluídos</p>
+                        </a>
                     </div>
                     <input
+                        className="inputIp"
                         id="inputIp"
                         type="text"
                         value={ipValue}
