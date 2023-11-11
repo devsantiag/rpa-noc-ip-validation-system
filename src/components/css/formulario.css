@@ -3,6 +3,11 @@ h3 {
     text-align: center;
 }
 
+.inputIp {
+    margin-top: 10px;
+    margin-left: 5.5px;
+}
+
 .styleList {
     margin: 2%;
     display: block;
@@ -21,6 +26,15 @@ h3 {
     display: flex;
     justify-content: flex-end;
     margin-right: 10px;
+}
+
+.homeIpExcluidos {
+    color: rgb(60, 60, 255);
+    text-decoration: underline;
+    margin-bottom: 10px;
+    margin: 0px;
+    display: flex;
+    width: 100px;
 }
 
 .buttonExcluded {
