@@ -9,6 +9,9 @@ export default function Formulario() {
     const [excluded, setExcluded] = useState(0);
     const [repeated, setRepeted] = useState(0);
 
+    // coleta informacoes do input
+    const getIpValue = ipValue;
+
     // formata o IP
     const format = (ip) => {
         const cleanCharacter = ip.replace(/\D/g, '');
@@ -27,6 +30,7 @@ export default function Formulario() {
         return ipMachineRegistration.some((ip) => ip === check);
     }
 
+
     // responsável para registrar o IP
     function hundleSubmit(e) {
 
@@ -38,9 +42,8 @@ export default function Formulario() {
         }
 
         // verifica que o tamanho do IP não é menor que 12
-        const getIpValue = ipValue;
         if (getIpValue.length < 12) {
-            alert('Não foi possível identificar este IP, por favor, tente novamente.');
+            alert('Não foi possível identificar este registro IP, por favor, tente novamente ou certifique-se que este esteja correto.');
             return;
         } else {
             // registra o IP no estado
@@ -50,13 +53,11 @@ export default function Formulario() {
         }
 
         // verifica se o IP já foi inserido
-        if (!alreadyRegistered(getIpValue)) {
-            return true;
-        } else {
-            alert('Este IP já foi incerido no sistema.');
+        if (alreadyRegistered(getIpValue)) {
+            alert('Este IP já foi incerido no sistema. Favor certificar com analista Nível 2.');
             setRepeted(repeated + 1);
-            return false;
         }
+        setDateTimeRegister()
     }
 
     // responsável por gravar a hora de registro do último IP inserido
@@ -72,22 +73,28 @@ export default function Formulario() {
         setExcluded(excluded + 1);
     }
 
+    const [manualDate, setManualDate] = useState()
+    const [manualTime, setManualTime] = useState()
+
+    function setDateTimeRegister() {
+        if (manualDate && manualTime) {
+            setRecordTime([...recordTime, +manualDate + ' ' + manualTime])
+        }
+    }
+
+
     return (
         <div>
             <main>
-                <h3>Registros de RPA</h3>
                 <form onSubmit={hundleSubmit}>
+
                     <div className="contadorRegistros">
                         <p>Registros: {ipMachineRegistration.length}</p>
                         <p>Repetidos: {repeated} </p>
                         <p>Excluidos: {excluded} </p>
-                        <p>Total de registros: 0 </p>
+                        <p>Total de registros: {ipMachineRegistration.length + excluded} </p>
                     </div>
-                    <div className="homeIpExcluidos">
-                        <a href="./Deleted.jsx" target="_blank">
-                            <p>IPs excluídos</p>
-                        </a>
-                    </div>
+
                     <input
                         className="inputIp"
                         id="inputIp"
@@ -95,14 +102,38 @@ export default function Formulario() {
                         value={ipValue}
                         onChange={hundleInputChange}
                         placeholder="Digite o IP"
-                        maxLength={12} />
+                        maxLength={12}
+                    />
+
                     <button>Registrar</button>
+
+                    <input
+                        type="date"
+                        name="manualDate"
+                        value={manualDate}
+                        onChange={(e) => setManualDate(e.target.value)}
+                    />
+                    <input
+                        type="time"
+                        name="manualTime"
+                        value={manualTime}
+                        onChange={(e) => setManualTime(e.target.value)}
+                    />
                 </form>
                 <section>
                     <li className='styleList'>
+
                         <h5>Últimos registros</h5>
+
                         {ipMachineRegistration.map((item, index) => (
-                            <li key={index} className="lineIndex"> ({index + 1}) - {item} último registro {recordTime[index].toLocaleString()} <button onClick={() => excluirIP(index)} className='buttonExcluded'>Excluir</button></li>
+
+                            <li key={index} className='lineIndex' >
+
+                                ({index + 1}) - {item} último registro {recordTime[index].toLocaleString()}
+
+                                <button onClick={() => excluirIP(index)} className='buttonExcluded'>Excluir</button>
+
+                            </li>
                         ))}
                     </li>
                 </section>
