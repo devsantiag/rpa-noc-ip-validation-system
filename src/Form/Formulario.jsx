@@ -30,7 +30,6 @@ export default function Formulario() {
         return ipMachineRegistration.some((ip) => ip === check);
     }
 
-
     // responsável para registrar o IP
     function hundleSubmit(e) {
 
@@ -81,8 +80,7 @@ export default function Formulario() {
             setRecordTime([...recordTime, +manualDate + ' ' + manualTime])
         }
     }
-
-
+                                
     return (
         <div>
             <main>
