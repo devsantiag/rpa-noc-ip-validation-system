@@ -9,8 +9,8 @@ export default function Formulario() {
     const [excluded, setExcluded] = useState(0);
     const [repeated, setRepeted] = useState(0);
 
-    // coleta informacoes do input
-    const getIpValue = ipValue;
+    // coleta as informações de entrada do input
+    const getIpValueInput = ipValue;
 
     // formata o IP
     const format = (ip) => {
@@ -30,6 +30,8 @@ export default function Formulario() {
         return ipMachineRegistration.some((ip) => ip === check);
     }
 
+
+
     // responsável para registrar o IP
     function hundleSubmit(e) {
         // evita o comportamento padrão
@@ -38,24 +40,27 @@ export default function Formulario() {
             alert('Campo vazio, tente novamente.');
             return;
         }
-
         // verifica que o tamanho do IP não é menor que 12
-        if (getIpValue.length < 12) {
-            alert('Não foi possível identificar este registro IP, por favor, tente novamente ou certifique-se que este esteja correto.');
-            return;
-        } else {
-            // registra o IP no estado
-            setipMachineRegistration([...ipMachineRegistration, getIpValue]);
-            setIpValue('');
-            recordTimeRecord();
-        }
+        try {
+            if (getIpValueInput.length < 12) {
+                alert('Não foi possível identificar este registro de IP. Por favor, tente novamente ou certifique-se de que o campo não está vazio e que o IP esteja correto.');
+                return;
+            } else {
+                // registra o IP no estado
+                setipMachineRegistration([...ipMachineRegistration, getIpValueInput]);
+                setIpValue('');
+                recordTimeRecord();
+            }
+            // verifica se o IP já foi inserido
+            if (alreadyRegistered(getIpValueInput)) {
+                alert('Este IP já foi incerido no sistema. Favor certificar com analista Nível 2.');
+                setRepeted(repeated + 1);
+            }
+            setDateTimeRegister()
 
-        // verifica se o IP já foi inserido
-        if (alreadyRegistered(getIpValue)) {
-            alert('Este IP já foi incerido no sistema. Favor certificar com analista Nível 2.');
-            setRepeted(repeated + 1);
+        } catch (error) {
+            console.error(error);
         }
-        setDateTimeRegister()
     }
 
     // responsável por gravar a hora de registro do último IP inserido
@@ -124,9 +129,7 @@ export default function Formulario() {
                 </form>
                 <section>
                     <li className='styleList'>
-
                         <h5>Últimos registros</h5>
-
                         {ipMachineRegistration.map((item, index) => (
                             <li key={index} className='lineIndex' >
                                 ({index + 1}) - {item} último registro {recordTime[index].toLocaleString()}
