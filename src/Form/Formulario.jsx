@@ -80,6 +80,8 @@ export default function Formulario() {
             const manualDateTime = new Date(`${manualDate} ${manualTime}`);
             const formattedManualDateTime = manualDateTime.toLocaleString();
             setRecordTime([...recordTime, formattedManualDateTime])
+            setManualDate('')
+            setManualTime('')
         }
     }
 
