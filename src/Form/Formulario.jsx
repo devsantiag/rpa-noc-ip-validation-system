@@ -61,7 +61,7 @@ export default function Formulario() {
 
     // responsável por gravar a hora de registro do último IP inserido
     function recordTimeRecord() {
-        const getLocalDate = new Date();
+        let getLocalDate = new Date();
         setRecordTime([...recordTime, getLocalDate]);
     }
 
@@ -77,10 +77,12 @@ export default function Formulario() {
 
     function setDateTimeRegister() {
         if (manualDate && manualTime) {
-            setRecordTime([...recordTime, +manualDate + ' ' + manualTime])
+            const manualDateTime = new Date(`${manualDate} ${manualTime}`);
+            const formattedManualDateTime = manualDateTime.toLocaleString();
+            setRecordTime([...recordTime, formattedManualDateTime])
         }
     }
-                                
+
     return (
         <div>
             <main>
