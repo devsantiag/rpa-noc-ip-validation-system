@@ -32,7 +32,6 @@ export default function Formulario() {
 
     // responsável para registrar o IP
     function hundleSubmit(e) {
-
         // evita o comportamento padrão
         e.preventDefault();
         if (ipValue === '') {
@@ -66,7 +65,7 @@ export default function Formulario() {
     }
 
     // responsável por excluir o IP
-    function excluirIP(index) {
+    function deleteIp(index) {
         setipMachineRegistration(ipMachineRegistration.filter((item, i) => i !== index));
         setRecordTime(recordTime.filter((item, i) => i !== index));
         setExcluded(excluded + 1);
@@ -121,6 +120,7 @@ export default function Formulario() {
                         value={manualTime}
                         onChange={(e) => setManualTime(e.target.value)}
                     />
+
                 </form>
                 <section>
                     <li className='styleList'>
@@ -128,13 +128,9 @@ export default function Formulario() {
                         <h5>Últimos registros</h5>
 
                         {ipMachineRegistration.map((item, index) => (
-
                             <li key={index} className='lineIndex' >
-
                                 ({index + 1}) - {item} último registro {recordTime[index].toLocaleString()}
-
-                                <button onClick={() => excluirIP(index)} className='buttonExcluded'>Excluir</button>
-
+                                <button onClick={() => deleteIp(index)} className='buttonExcluded'>Excluir</button>
                             </li>
                         ))}
                     </li>

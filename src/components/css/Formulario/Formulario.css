@@ -28,7 +28,7 @@ h3 {
 .contadorRegistros p {
     display: flex;
     justify-content: flex-end;
-    margin-right: 10px;
+    margin: 0;
 }
 
 .homeIpExcluidos {
