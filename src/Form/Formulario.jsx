@@ -53,7 +53,6 @@ export default function Formulario() {
             setDateTimeRegister()
 
         } catch (error) {
-            console.error(error);
             alert('O campo encontra-se vazio. Por favor, tente novamente.');
         }
     }
@@ -123,7 +122,7 @@ export default function Formulario() {
                     />
 
                 </form>
-                <section>
+                <section> 
                     <li className='styleList'>
                         <h5>Últimos registros</h5>
                         {ipMachineRegistration.map((item, index) => (
