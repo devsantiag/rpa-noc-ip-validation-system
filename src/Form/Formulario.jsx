@@ -15,7 +15,7 @@ export default function Formulario() {
     // formata o IP
     const format = (ip) => {
         const cleanCharacter = ip.replace(/\D/g, '');
-        const ipPattern = cleanCharacter.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3.$4');
+        const ipPattern = cleanCharacter.replace(/(\d{2})(\d{3})(\d{3})(\d{3})/, '$1.$2.$3.$4');
         return ipPattern;
     };
 
@@ -30,20 +30,14 @@ export default function Formulario() {
         return ipMachineRegistration.some((ip) => ip === check);
     }
 
-
-
     // responsável para registrar o IP
     function hundleSubmit(e) {
-        // evita o comportamento padrão
         e.preventDefault();
-        if (ipValue === '') {
-            alert('Campo vazio, tente novamente.');
-            return;
-        }
+
         // verifica que o tamanho do IP não é menor que 12
         try {
             if (getIpValueInput.length < 12) {
-                alert('Não foi possível identificar este registro de IP. Por favor, tente novamente ou certifique-se de que o campo não está vazio e que o IP esteja correto.');
+                alert('Não foi possível identificar este registro de IP. Por favor, tente novamente ou certifique-se que o IP esteja correto.');
                 return;
             } else {
                 // registra o IP no estado
@@ -60,6 +54,7 @@ export default function Formulario() {
 
         } catch (error) {
             console.error(error);
+            alert('O campo encontra-se vazio. Por favor, tente novamente.');
         }
     }
 
@@ -114,6 +109,7 @@ export default function Formulario() {
                     <button>Registrar</button>
 
                     <input
+                        className="manualDate"
                         type="date"
                         name="manualDate"
                         value={manualDate}
